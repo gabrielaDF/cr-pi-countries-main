@@ -4,10 +4,10 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "Country",
+    "Activity",
     {
       id: {
-        type: DataTypes.STRING(3),
+        type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
       },
@@ -18,39 +18,19 @@ module.exports = (sequelize) => {
           len: [3, 100],
         },
       },
-      image: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          isUrl: true,
-        },
-      },
-      region: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [3, 100],
-        },
-      },
-      capital: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          len: [3, 100],
-        },
-      },
-      subregion: {
-        type: DataTypes.STRING,
-        validate: {
-          len: [3, 100],
-        },
-      },
-      area: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-      },
-      population: {
+      dificutl: {
         type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          min: 1,
+          max: 5,
+        },
+      },
+      durations: {
+        type: DataTypes.FLOAT,
+      },
+      temporada: {
+        type: DataTypes.ENUM("Verano", "Otoño", "Invierno", "Primavera"),
         allowNull: false,
       },
     },
