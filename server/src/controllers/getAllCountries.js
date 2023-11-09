@@ -19,9 +19,19 @@ const getAllCountries = async (req, res) => {
       };
     });
 
-    console.log("getCountries", allCountries);
+    // console.log(allCountries);
+    await Country.bulkCreate(allCountries, {
+      updateOnDuplicate: [
+        "name",
+        "image",
+        "continents",
+        "capital",
+        "subregion",
+        "area",
+        "population",
+      ],
+    });
     res.status(200).json(allCountries);
-    await Country.bulkCreate(allCountries);
   } catch (error) {
     return { message: error.message };
   }

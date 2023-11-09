@@ -8,6 +8,7 @@ conn
   .sync({ force: true })
   .then(() => {
     server.listen(PORT, () => {
+      getAllCountries();
       console.log(`Server listening on port ${PORT}`);
     });
   })
