@@ -9,7 +9,7 @@ const router = Router();
 router.get("/countries", getAllCountries);
 // router.get("/countries/id:", getById);
 // router.get("/countries/name:", getByName);
-// router.get("activities", getAllActivities);
+// router.get("/activities", getAllActivities);
 // router.post("/activities", postActivities);
 
 module.exports = router;

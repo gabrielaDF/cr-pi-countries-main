@@ -13,9 +13,9 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          len: [3, 100],
-        },
+        // validate: {
+        //   len: [3, 100],
+        // },
       },
       image: {
         type: DataTypes.STRING,
@@ -24,19 +24,19 @@ module.exports = (sequelize) => {
           isUrl: true,
         },
       },
-      continets: {
+      continents: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          len: [3, 100],
-        },
+        // validate: {
+        //   len: [3, 100],
+        // },
       },
       capital: {
         type: DataTypes.STRING,
         allowNull: false,
-        validate: {
-          len: [3, 100],
-        },
+        // validate: {
+        //   len: [3, 100],
+        // },
       },
       subregion: {
         type: DataTypes.STRING,
