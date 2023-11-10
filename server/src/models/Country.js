@@ -40,9 +40,9 @@ module.exports = (sequelize) => {
       },
       subregion: {
         type: DataTypes.STRING,
-        validate: {
-          len: [3, 100],
-        },
+        // validate: {
+        //   len: [3, 100],
+        // },
       },
       area: {
         type: DataTypes.FLOAT,

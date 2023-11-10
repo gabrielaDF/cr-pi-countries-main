@@ -1,6 +1,7 @@
 const axios = require("axios");
 const URL = "http://localhost:5000/countries";
-const { Country } = require("../db");
+const { Country, Activity } = require("../db");
+const { Op } = require("sequelize");
 
 const getAllCountries = async (req, res) => {
   try {
@@ -31,7 +32,28 @@ const getAllCountries = async (req, res) => {
         "population",
       ],
     });
-    res.status(200).json(allCountries);
+    const name = req.query.name;
+    if (!name) {
+      res.status(200).json(allCountries);
+    } else {
+      let countries = await Country.findAll({
+        where: {
+          name: {
+            [Op.iLike]: `%${name}%`,
+          },
+        },
+        include: [
+          {
+            model: Activity,
+            as: "Activities",
+          },
+        ],
+      });
+      if (countries.length === 0) {
+        return res.status(404).json({ message: "No countries found" });
+      }
+      res.status(200).json(countries);
+    }
   } catch (error) {
     return { message: error.message };
   }
