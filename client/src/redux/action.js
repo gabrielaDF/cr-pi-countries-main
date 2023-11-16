@@ -9,19 +9,18 @@ import {
   ORDER_ALPHABETS,
   ORDER_POPULATION,
   CLEAR,
-} from "./actions-type";
+} from "./actions-types";
 import axios from "axios";
 
-const API_URL = "http:localhost:3001";
+const API_URL = "http://localhost:3001";
 
 export function allCountries() {
   return async (dispatch) => {
     try {
-      await axios(`${API_URL}/countries`).then((result) => {
-        return dispatch({
-          type: ALL_COUNTRIES,
-          payload: result.data,
-        });
+      const result = await axios(`${API_URL}/countries`);
+      dispatch({
+        type: ALL_COUNTRIES,
+        payload: result.data,
       });
     } catch (error) {
       throw Error(error.message);
@@ -31,56 +30,52 @@ export function allCountries() {
 export function countryByName(name) {
   return async (dispatch) => {
     try {
-      await axios(`${API_URL}/countries?name= ${name}`).then((result) => {
-        return dispatch({
-          type: GET_COUNTRY_NAME,
-          payload: result.data,
-        });
+      const result = await axios(`${API_URL}/countries?name=${name}`);
+      dispatch({
+        type: GET_COUNTRY_NAME,
+        payload: result.data,
       });
     } catch (error) {
-      throw Error(error.message);
+      throw new Error(error.message);
     }
   };
 }
 export function countryById(id) {
   return async (dispatch) => {
     try {
-      await axios(`${API_URL}/countries/${id}`).then((result) => {
-        return dispatch({
-          type: GET_COUNTRY_ID,
-          payload: result.data,
-        });
+      const result = await axios(`${API_URL}/countries/${id}`);
+      dispatch({
+        type: GET_COUNTRY_ID,
+        payload: result.data,
       });
     } catch (error) {
-      throw Error(error.message);
+      throw new Error(error.message);
     }
   };
 }
 export function createActivity(activity) {
   return async (dispatch) => {
     try {
-      await axios.post(`${API_URL}//activities`, activity).then((result) => {
-        return dispatch({
-          type: CREATE_ACTIVITY,
-          payload: result,
-        });
+      const result = await axios.post(`${API_URL}//activities`, activity);
+      dispatch({
+        type: CREATE_ACTIVITY,
+        payload: result,
       });
     } catch (error) {
-      throw Error(error.message);
+      throw new Error(error.message);
     }
   };
 }
 export function allActivity() {
   return async (dispatch) => {
     try {
-      await axios(`${API_URL}/activities`).then((result) => {
-        return dispatch({
-          type: ALL_ACTIVITY,
-          payload: result.data,
-        });
+      const result = await axios.get(`${API_URL}/activities`);
+      dispatch({
+        type: ALL_ACTIVITY,
+        payload: result.data,
       });
     } catch (error) {
-      throw Error(error.message);
+      throw new Error(error.message);
     }
   };
 }

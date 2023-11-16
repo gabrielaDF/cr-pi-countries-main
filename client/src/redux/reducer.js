@@ -9,12 +9,12 @@ import {
   ORDER_ALPHABETS,
   ORDER_POPULATION,
   CLEAR,
-} from "./actions-type";
+} from "./actions-types";
 const initialState = {
   countries: [],
   detail: [],
   copyCountries: [],
-  allActivities: [],
+  allActivity: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -23,7 +23,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         countries: action.payload,
         copyCountries: action.payload,
-        allActivities: action.payload,
       };
     case GET_COUNTRY_NAME:
       return {
@@ -43,7 +42,7 @@ const rootReducer = (state = initialState, action) => {
     case ALL_ACTIVITY:
       return {
         ...state,
-        allActivities: action.payload,
+        allActivity: action.payload,
       };
     case ORDER_ALPHABETS:
       if (action.payload === "asc") {
@@ -86,7 +85,9 @@ const rootReducer = (state = initialState, action) => {
         let continent =
           action.payload === "todos"
             ? state.copyCountries
-            : state.cop4.filter((c) => c.continents === action.payload);
+            : state.copyCountries.filter(
+                (c) => c.continents === action.payload
+              );
         return {
           ...state,
           countries: continent,
@@ -95,20 +96,43 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       };
+
     case FILTER_ACTIVITY:
-      let mapCountries =
-        action.payload === "todos"
-          ? state.copyCountries
-          : state.copyCountries.filter((c) => {
-              let mapeo = c.activities?.map((d) => d.name);
-              if (mapeo.includes(action.payload)) {
-                return c;
-              }
-            });
+      let filteredCountries;
+
+      if (action.payload === "Unfiltered") {
+        // Obtener todos los países que tienen actividades registradas
+        filteredCountries = state.copyCountries;
+      } else if (action.payload === "AllActivities") {
+        // Obtener todos los países que tienen actividades registradas
+        const countryNamesWithActivities = state.allActivity.map((item) =>
+          item.Countries[0] ? item.Countries[0].name : null
+        );
+
+        // Filtrar state.copyCountries según la lista de countryNamesWithActivities
+        filteredCountries = state.copyCountries.filter((country) =>
+          countryNamesWithActivities.includes(country.name)
+        );
+      } else {
+        // Obtener los países según el nombre de la actividad
+        const matchingItems = state.allActivity.filter(
+          (item) => item.name === action.payload
+        );
+        const countryNames = matchingItems.map((item) =>
+          item.Countries[0] ? item.Countries[0].name : null
+        );
+
+        // Filtrar state.copyCountries según la lista de countryNames
+        filteredCountries = state.copyCountries.filter((country) =>
+          countryNames.includes(country.name)
+        );
+      }
+
       return {
         ...state,
-        countries: mapCountries,
+        countries: filteredCountries,
       };
+
     case CLEAR:
       return {
         ...state,
