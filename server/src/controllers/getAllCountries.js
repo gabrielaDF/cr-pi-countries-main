@@ -11,7 +11,7 @@ const getAllCountries = async (req, res) => {
       return {
         id: country.cca3,
         name: country.name.common,
-        image: country.flags.png,
+        image: country.flags.svg,
         continents: country.continents ? country.continents[0] : "undefine",
         capital: country.capital ? country.capital[0] : "undefine",
         subregion: country.subregion,
@@ -20,7 +20,7 @@ const getAllCountries = async (req, res) => {
       };
     });
 
-    // console.log(allCountries);
+    //console.log(allCountries);
     await Country.bulkCreate(allCountries, {
       updateOnDuplicate: [
         "name",
