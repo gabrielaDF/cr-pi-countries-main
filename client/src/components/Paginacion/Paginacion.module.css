@@ -26,11 +26,10 @@
   border: none;
   border-radius: 1rem;
   height: 2rem;
-  width: 3rem;
   color: rgb(55, 55, 55);
   text-align: center;
-  margin-left: 0.5rem;
-  /* font-weight: bolder; */
+  line-height: 0.8rem;
+  font-weight: bolder;
 }
 .inputNumber {
   /* font-size: 10px; */
@@ -43,7 +42,7 @@
   color: rgb(55, 55, 55);
   text-align: center;
   margin-left: 0.5rem;
-  /* font-weight: bolder; */
+  font-weight: bolder;
 }
 
 .anterior {

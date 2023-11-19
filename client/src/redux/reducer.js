@@ -15,6 +15,7 @@ const initialState = {
   detail: [],
   copyCountries: [],
   allActivity: [],
+  originalCountries: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -23,6 +24,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         countries: action.payload,
         copyCountries: action.payload,
+        originalCountries: action.payload,
       };
     case GET_COUNTRY_NAME:
       return {
@@ -38,48 +40,61 @@ const rootReducer = (state = initialState, action) => {
     case CREATE_ACTIVITY:
       return {
         ...state,
+        allActivity: [...state.allActivity, action.payload],
       };
+
     case ALL_ACTIVITY:
       return {
         ...state,
         allActivity: action.payload,
       };
     case ORDER_ALPHABETS:
-      if (action.payload === "asc") {
-        let countriesAsc = state.countries.sort((a, b) =>
-          a.name > b.name ? 1 : a.name < b.name ? -1 : 0
-        );
+      if (action.payload === "Disorderly") {
         return {
           ...state,
-          countries: countriesAsc,
+          countries: [...state.originalCountries],
+          orderAlphabets: null,
         };
       } else {
-        let countriesDes = state.countries.sort((b, a) =>
-          a.name > b.name ? 1 : a.name < b.name ? -1 : 0
-        );
+        const sortOrder = action.payload === "asc" ? "asc" : "des";
+        const sortedCountries = state.countries
+          .slice()
+          .sort((a, b) =>
+            sortOrder === "asc"
+              ? a.name.localeCompare(b.name)
+              : b.name.localeCompare(a.name)
+          );
+
         return {
           ...state,
-          countries: countriesDes,
+          countries: sortedCountries,
+          orderAlphabets: sortOrder,
         };
       }
     case ORDER_POPULATION:
-      if (action.payload === "asc") {
-        let countriesMaMe = state.countries.sort((a, b) =>
-          a.population > b.population ? 1 : a.population < b.population ? -1 : 0
-        );
+      if (action.payload === "Disorderly") {
         return {
           ...state,
-          countries: countriesMaMe,
+          countries: [...state.originalCountries],
+          orderPopulation: null,
         };
       } else {
-        let countriesMeMa = state.countries.sort((b, a) =>
-          a.population > b.population ? 1 : a.population < b.population ? -1 : 0
-        );
+        const sortOrder = action.payload === "asc" ? "asc" : "des";
+        const sortedCountries = state.countries
+          .slice()
+          .sort((a, b) =>
+            sortOrder === "asc"
+              ? a.population - b.population
+              : b.population - a.population
+          );
+
         return {
           ...state,
-          countries: countriesMeMa,
+          countries: sortedCountries,
+          orderPopulation: sortOrder,
         };
       }
+
     case FILTER_CONTINENT:
       if (action.payload) {
         let continent =

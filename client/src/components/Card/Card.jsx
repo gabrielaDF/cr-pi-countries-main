@@ -6,12 +6,13 @@ import useWindowDimensions from "../Hook/useWindowsDimensions";
 function Card({ flags, name, continents, id }) {
   const { width } = useWindowDimensions();
   const movil = 460;
+
   if (width > movil) {
     return (
       <div className={styles.borde}>
         <div className={styles.contenido}>
           <div>
-            <img className={styles.imagen} src={flags} alt="flag" />
+            <img className={styles.imagen} src={flags} alt="flags" />
           </div>
           <div className={styles.pais}>
             <h4>{name}</h4>

@@ -29,13 +29,10 @@ function SearchBar({ setInput, setPag }) {
           type="search"
           name="search"
           value={name}
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
           placeholder="Search country"
         />
-        <button
-          className={style.button}
-          onClick={(e) => handleSumit(e)}
-        ></button>
+        <button className={style.button} onClick={handleSumit}></button>
       </div>
     );
   } else {
@@ -46,10 +43,10 @@ function SearchBar({ setInput, setPag }) {
           type="search"
           name="search"
           value={name}
-          onChange={(e) => handleChange(e)}
+          onChange={handleChange}
           placeholder="Search Country"
         />
-        <button className={style.button_movil} onClick={(e) => handleSumit(e)}>
+        <button className={style.button_movil} onClick={handleSumit}>
           <img
             src={Lupa}
             className={style.button_movil_img}

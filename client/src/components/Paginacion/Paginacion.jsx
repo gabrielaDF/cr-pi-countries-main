@@ -45,7 +45,7 @@ function Paginacion({ pag, setPag, max, input, setInput }) {
         name="pag"
         autoComplete="off"
         value={input}
-        onChange={(e) => handlePagination(e)}
+        onChange={handlePagination}
       />
       <button className={style.numeros}>of {max}</button>
       {input === max ? (

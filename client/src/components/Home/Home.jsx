@@ -20,6 +20,14 @@ function Home() {
   const { countries } = useSelector((state) => state);
 
   const dispatch = useDispatch();
+
+  const [pag, setPag] = useState(1);
+  const { width } = useWindowDimensions();
+  const movil = 460;
+  const [countriesPag] = useState(width > movil ? 10 : 3);
+  let [input, setInput] = useState(1);
+  let datos = countries === "The country was not found" ? "0" : countries;
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -34,32 +42,21 @@ function Home() {
     fetchData();
   }, [dispatch]);
 
-  const allActivityData = useSelector((state) => state.allActivity) || [];
-  let filterActivities = allActivityData || [];
-  console.log(allActivityData);
-  // Obtén un array plano de todas las actividades
-  let allActivities = filterActivities.flatMap((c) => c.name || []);
-
-  // Filtra actividades duplicadas basándote en la propiedad 'name'
-  let uniqueActivitiesSet = new Set(allActivities);
-
-  // Convierte el conjunto a un array
-  let uniqueActivities = Array.from(uniqueActivitiesSet);
-
-  // Filtra valores indefinidos
-  let arrayActivity1 = uniqueActivities.filter(
-    (activity) => activity !== undefined
-  );
-  console.log("arrayActivity1:", arrayActivity1);
-
-  const [pag, setPag] = useState(1);
-  const { width } = useWindowDimensions();
-  const movil = 460;
-  const [countriesPag] = useState(width > movil ? 10 : 3);
-  let [input, setInput] = useState(1);
-  let datos = countries === "The country was not found" ? "0" : countries;
   const max = Math.ceil(
     datos?.length ? datos.length / countriesPag : datos.length / countriesPag
+  );
+
+  const allActivityData = useSelector((state) => state.allActivity) || [];
+  let filterActivities = allActivityData || [];
+
+  let allActivities = filterActivities.flatMap((c) => c.name || []);
+
+  let uniqueActivitiesSet = new Set(allActivities);
+
+  let uniqueActivities = Array.from(uniqueActivitiesSet);
+
+  let arrayActivity1 = uniqueActivities.filter(
+    (activity) => activity !== undefined
   );
 
   function handleSelectAlphabets(event) {
@@ -84,6 +81,16 @@ function Home() {
     setInput((input = 1));
     setPag(1);
   }
+  const handleResetFilters = () => {
+    dispatch(orderAlphabets("Disorderly"));
+    dispatch(orderPopulation("Disorderly"));
+    dispatch(filterContinent("todos"));
+    dispatch(filterActivity("Unfiltered"));
+
+    setPag(1);
+    setInput(1);
+  };
+
   return (
     <div className={style.imagen}>
       <Nav setInput={setInput} setPag={setPag} />
@@ -95,6 +102,7 @@ function Home() {
           onChange={(event) => handleSelectAlphabets(event)}
         >
           <option> Order Alphabets</option>
+          <option value="Disorderly">Disorderly</option>
           <option value="asc">Ascendent</option>
           <option value="des">Descendent</option>
         </select>
@@ -105,6 +113,7 @@ function Home() {
           onChange={(event) => handleSelectPopulation(event)}
         >
           <option>Order Population</option>
+          <option value="Disorderly">Disorderly</option>
           <option value="asc">Ascendent</option>
           <option value="des">Descendent</option>
         </select>
@@ -140,6 +149,9 @@ function Home() {
             );
           })}
         </select>
+        <a href="#" onClick={handleResetFilters} className={style.resetLink}>
+          Reset Filters
+        </a>
       </nav>
       <Paginacion
         pag={pag}
@@ -173,10 +185,9 @@ function Home() {
               return (
                 <div key={country.id}>
                   <Card
-                    flags={country.flags}
+                    flags={country.image}
                     name={country.name}
                     continents={country.continents}
-                    // key={country.id}
                     id={country.id}
                     activities={country.activities}
                   />

@@ -9,7 +9,7 @@ function LandingPage() {
       <div className={style.contenedor}>
         <div className={style.countryLogo}>
           <div className={style.contenedorLogo}>
-            <div>
+            <div className={style.centerText}>
               <p className={style.country}>KNOW THE COUNTRIES</p>
             </div>
             <div>

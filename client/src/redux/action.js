@@ -36,7 +36,11 @@ export function countryByName(name) {
         payload: result.data,
       });
     } catch (error) {
-      throw new Error(error.message);
+      if (error.response && error.response.status === 404) {
+        alert("No countries found");
+      } else {
+        throw Error(error.message);
+      }
     }
   };
 }
@@ -56,10 +60,12 @@ export function countryById(id) {
 export function createActivity(activity) {
   return async (dispatch) => {
     try {
-      const result = await axios.post(`${API_URL}//activities`, activity);
+      const response = await axios.post(`${API_URL}/activities`, activity);
+      const createdActivity = response.data;
+
       dispatch({
         type: CREATE_ACTIVITY,
-        payload: result,
+        payload: createdActivity,
       });
     } catch (error) {
       throw new Error(error.message);

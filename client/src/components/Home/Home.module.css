@@ -1,3 +1,10 @@
+body {
+  background-image: url("cielo.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  /* You can add other background properties as needed */
+}
 .search {
   font-weight: 300;
   font-size: 40px;
@@ -7,10 +14,16 @@
   border-radius: 1rem;
   padding: 2rem;
 }
-
+.resetLink {
+  color: #05000f;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  font-size: 20px;
+}
 .cardContent {
   display: flex;
-  padding: 2rem;
+  padding: 1rem;
   font: times;
   width: auto;
   height: auto;
@@ -34,35 +47,18 @@
   border: none;
 }
 
-.orden {
-  border: none;
-  /* margin-left: 4rem; */
+.orden,
+.population,
+.continent,
+.activity {
+  margin: 0.2rem; /* Adjust the margin as needed */
+  padding: 0.2rem; /* Adjust the padding as needed */
+  font-size: 16px; /* Adjust the font size as needed */
+  border: 1px solid #ccc; /* Add a border for a cleaner look */
+  border-radius: 5px; /* Adjust the border radius as needed */
+  background-color: rgb(199, 215, 221); /* Set the background color */
+  color: #24086b; /* Set the text color */
   cursor: pointer;
-  background-color: #ffffff;
-  height: 1.5rem;
-  width: 8rem;
-  color: rgb(55, 55, 55);
-  text-align: center;
-}
-
-.actividad {
-  /* margin-left: 4rem; */
-  cursor: pointer;
-  border: none;
-  background-color: #ffffff;
-  height: 1.5rem;
-  width: 8rem;
-  color: rgb(55, 55, 55);
-  text-align: center;
-  margin-right: 1rem;
-}
-.poblacion {
-  border: none;
-  cursor: pointer;
-  height: 1.5rem;
-  width: 8rem;
-  color: rgb(55, 55, 55);
-  text-align: center;
 }
 
 .contenedorCards {
@@ -75,10 +71,10 @@
 }
 
 .loading {
-  width: 100%;
+  width: 50%;
   height: 60vh;
   display: flex;
-  animation: animar 5s cubic-bezier(0, 0, 1, 1.03) infinite;
+  animation: animar 5s cubic-bezier(0, 0, 1, 1.01) infinite;
   justify-content: center;
   align-items: center;
 }

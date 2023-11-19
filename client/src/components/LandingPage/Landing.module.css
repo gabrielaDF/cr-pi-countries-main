@@ -1,7 +1,7 @@
 .imagen {
-  background-image: url("./landing_landing.jpeg");
+  background-image: url("./landing.jpeg");
   height: 100vh;
-  width: 100%;
+  width: auto;
   text-align: center;
   position: relative;
   background-size: cover;
@@ -9,15 +9,20 @@
   align-items: center;
   flex-direction: column;
   align-content: stretch;
+  filter: brightness(90%);
+  background-color: rgba(0, 0, 0, 0.1);
 }
 .logo {
   width: auto;
   height: 8rem;
   padding: 1.5rem;
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
 }
 .contenedor {
   display: block;
-  /* width: 100%; */
+  width: 100%;
   height: 0rem;
   padding: 120px;
 }
@@ -29,12 +34,12 @@
 }
 .countryLogo {
   display: flex;
-  width: 50%;
+  width: 90%;
   height: auto;
   padding: 5rem;
   align-items: flex-start;
   justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   flex-wrap: nowrap;
   align-content: flex-start;
 }
@@ -46,8 +51,8 @@
 }
 .button {
   margin: 1rem;
-  /* border: 1px solid;
-    border-color: white; */
+  border: 1px solid;
+  border-color: white;
   border: none;
   width: 8rem;
   height: 3rem;
@@ -62,7 +67,15 @@
   font-family: sans-serif;
   font-weight: normal;
   font-size: 5rem;
+  color: rgb(182, 222, 19);
+  text-shadow: 4px 4px 9px rgba(249, 247, 247, 0.5);
   width: 1000px;
+}
+.centerText {
+  display: flexbox;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 @media screen and (max-width: 460px) {
   .country {
