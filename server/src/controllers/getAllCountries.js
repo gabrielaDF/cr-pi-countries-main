@@ -45,7 +45,10 @@ const getAllCountries = async (req, res) => {
         include: [
           {
             model: Activity,
-            as: "Activities",
+            attributes: ["name", "difficulty", "duration", "season"],
+            through: {
+              attributes: [],
+            },
           },
         ],
       });
