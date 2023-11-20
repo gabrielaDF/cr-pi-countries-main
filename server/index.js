@@ -5,7 +5,7 @@ const getAllCountries = require("./src/controllers/getAllCountries.js");
 const PORT = 3001;
 
 conn
-  .sync({ alter: true })
+  .sync({ alter: false })
   .then(() => {
     server.listen(PORT, () => {
       getAllCountries();
