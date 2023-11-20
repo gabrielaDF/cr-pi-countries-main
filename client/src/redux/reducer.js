@@ -30,7 +30,6 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         countries: action.payload,
-        countrieName: action.payload,
       };
     case GET_COUNTRY_ID:
       return {
@@ -40,7 +39,7 @@ const rootReducer = (state = initialState, action) => {
     case CREATE_ACTIVITY:
       return {
         ...state,
-        allActivity: [...state.allActivity, action.payload],
+        allActivity: action.payload,
       };
 
     case ALL_ACTIVITY:

@@ -33,7 +33,7 @@
   width: 30rem;
   display: flex;
   margin: 3rem;
-  /* background-color: #bec7e1; */
+  background-color: #335cd9;
   border: none;
   border-radius: 1rem;
   box-shadow: -1px 1px 22px 9px rgb(55, 55, 55);
@@ -76,9 +76,9 @@
 .label {
   text-align: start;
   padding: none;
-  /* margin-left: 0.5rem; */
+  font-weight: bolder;
   font-size: 0.9rem;
-  color: grey;
+  color: rgb(8, 0, 0);
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
@@ -123,15 +123,16 @@ input[type="radio"]:checked {
   color: white;
   border: none;
   background-color: rgb(55, 55, 55);
+  text-align: center;
 }
 button:hover {
   background-color: rgb(55, 55, 55);
   color: rgb(0, 0, 0);
   border: none;
   font-weight: bold;
-  /* box-shadow: -6px 8px 12px -3px rgba(0,0,0,0.77);
-        -webkit-box-shadow: -6px 8px 12px -3px rgba(0,0,0,0.77);
-        -moz-box-shadow: -6px 8px 12px -3px rgba(0,0,0,0.77); */
+  box-shadow: -6px 8px 12px -3px rgba(0, 0, 0, 0.77);
+  -webkit-box-shadow: -6px 8px 12px -3px rgba(0, 0, 0, 0.77);
+  -moz-box-shadow: -6px 8px 12px -3px rgba(0, 0, 0, 0.77);
   box-shadow: -1px 0px 4px 5px rgb(55, 55, 55);
 }
 
@@ -195,9 +196,9 @@ buttonClose:hover {
   color: white;
   display: flex;
   flex-wrap: nowrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
   flex-direction: row;
-  background-image: url("../Landing/landing_landing.png");
+  background-color: rgba(32, 30, 30, 0.774);
   height: 8rem;
   width: auto;
   align-content: flex-start;
@@ -223,36 +224,4 @@ buttonClose:hover {
   height: 5rem;
   padding: 2rem;
   margin: 3rem;
-}
-@media screen and (max-width: 460px) {
-  .formulario {
-    width: auto;
-    flex-direction: column;
-    box-shadow: none;
-    padding: 0;
-  }
-  .name {
-    width: 22rem;
-  }
-  .duration {
-    width: 22rem;
-  }
-  .country {
-    width: 22rem;
-  }
-  .header {
-    background: rgb(55, 55, 55);
-    display: flex;
-    height: 7rem;
-    justify-content: space-between;
-  }
-  .button_movil_atras {
-    width: 20px;
-    height: auto;
-  }
-  .volver {
-    margin: 1rem;
-    background: none;
-    width: 20%;
-  }
 }

@@ -18,6 +18,7 @@ function FormPage() {
     season: "",
     countries: [],
   });
+
   const { countries } = useSelector((state) => state);
   const dispatch = useDispatch();
   const navegate = useNavigate();
@@ -37,7 +38,7 @@ function FormPage() {
   }
   function handleChange(e) {
     setState({
-      ...state, // copia de datos para no eliminar lo que ya escribimos
+      ...state,
       [e.target.name]: e.target.value,
     });
   }
@@ -58,8 +59,7 @@ function FormPage() {
   }
   function handleSumit(e) {
     e.preventDefault();
-
-    // Validate form fields
+    const durationAsFloat = parseFloat(state.duration);
     const nameError = validations.validateName(state.name);
     const difficultyError = validations.validateDifficulty(state.difficulty);
     const seasonError = validations.validateSeason(state.season);
@@ -72,9 +72,18 @@ function FormPage() {
       return;
     }
     // If no errors, proceed with creating the activity
-    const countryIds = state.countries.map((country) => country.id);
-    const activityData = { ...state, countries: countryIds };
-    dispatch(createActivity(activityData));
+
+    const arrayIds = state.countries;
+    console.log(arrayIds);
+    for (var i = 0; i < arrayIds.length; i++) {
+      const activityData = {
+        ...state,
+        countries: arrayIds[i].toString(),
+        duration: durationAsFloat,
+      };
+      dispatch(createActivity(activityData));
+      console.log(activityData);
+    }
 
     // Reset form state
     setState({
@@ -91,13 +100,10 @@ function FormPage() {
   {
     mostrarError && <div className={styles.error}>{error}</div>;
   }
-
   return (
     <>
       <header className={styles.header}>
         <Link to="/countries">
-          <button className={styles.volver}>HOME</button>
-
           <img className={styles.logo} src={logo} alt="logo" />
         </Link>
         <div>

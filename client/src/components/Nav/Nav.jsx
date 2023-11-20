@@ -20,7 +20,7 @@ function Nav({ setInput, setPag }) {
           <SearchBar setInput={setInput} setPag={setPag} />
         </div>
         <div>
-          <Link to="/activity" className={style.textCreate}>
+          <Link to="/activities" className={style.textCreate}>
             <button className={style.nuevaActividad}>
               CREATE A NEW ACTIVITY
             </button>

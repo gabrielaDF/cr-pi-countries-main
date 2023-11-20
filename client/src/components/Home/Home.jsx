@@ -27,13 +27,14 @@ function Home() {
   const [countriesPag] = useState(width > movil ? 10 : 3);
   let [input, setInput] = useState(1);
   let datos = countries === "The country was not found" ? "0" : countries;
-
+  const [dataLoaded, setDataLoaded] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
         await dispatch(allCountries());
         await dispatch(clear());
         await dispatch(allActivity());
+        setDataLoaded(true);
       } catch (error) {
         console.error("Error fetching data:", error.message);
       }
@@ -42,15 +43,22 @@ function Home() {
     fetchData();
   }, [dispatch]);
 
-  const max = Math.ceil(
-    datos?.length ? datos.length / countriesPag : datos.length / countriesPag
-  );
+  const max = dataLoaded
+    ? Math.ceil(
+        datos?.length
+          ? datos.length / countriesPag
+          : datos.length / countriesPag
+      )
+    : 0;
 
   const allActivityData = useSelector((state) => state.allActivity) || [];
   let filterActivities = allActivityData || [];
-
-  let allActivities = filterActivities.flatMap((c) => c.name || []);
-
+  console.log(filterActivities);
+  let allActivities = [];
+  if (Array.isArray(filterActivities)) {
+    allActivities = filterActivities.flatMap((c) => c.name || []);
+  }
+  console.log(allActivities);
   let uniqueActivitiesSet = new Set(allActivities);
 
   let uniqueActivities = Array.from(uniqueActivitiesSet);
@@ -102,7 +110,7 @@ function Home() {
           onChange={(event) => handleSelectAlphabets(event)}
         >
           <option> Order Alphabets</option>
-          <option value="Disorderly">Disorderly</option>
+          {/* <option value="Disorderly">Disorderly</option> */}
           <option value="asc">Ascendent</option>
           <option value="des">Descendent</option>
         </select>
@@ -113,7 +121,7 @@ function Home() {
           onChange={(event) => handleSelectPopulation(event)}
         >
           <option>Order Population</option>
-          <option value="Disorderly">Disorderly</option>
+          {/* <option value="Disorderly">Disorderly</option> */}
           <option value="asc">Ascendent</option>
           <option value="des">Descendent</option>
         </select>

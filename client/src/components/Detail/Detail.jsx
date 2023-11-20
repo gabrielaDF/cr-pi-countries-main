@@ -15,7 +15,8 @@ function Detail() {
   useEffect(() => {
     dispatch(countryById(id));
   }, [dispatch, id]);
-
+  console.log("Detail:", detail);
+  console.log("Activities:", detail.Activities);
   return (
     <div>
       <header className={styles.header}>
@@ -26,7 +27,7 @@ function Detail() {
         <h2>DESCRIPTION OF THE COUNTRIES</h2>
       </header>
       {detail.name ? (
-        <>
+        <div className={styles.container}>
           <section className={styles.contenedor}>
             <img src={detail.image} className={styles.imagen} alt="flags" />
             <div className={styles.detalles}>
@@ -37,23 +38,23 @@ function Detail() {
               <p>AREA: {detail.area}</p>
               <p>SUB-REGION: {detail.subregion}</p>
             </div>
+            <div className={styles.activity}>
+              {detail.Activities?.map((actividad) => {
+                return (
+                  <article key={actividad.id}>
+                    <div className={styles.boxActivity}>
+                      <h3>Activity</h3>
+                      <p>Name: {actividad.name}</p>
+                      <p>Difficulty: {actividad.difficulty}</p>
+                      <p>Season: {actividad.season}</p>
+                      <p>Duration: {actividad.duration}</p>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
           </section>
-          <section className={styles.activity}>
-            {detail.Activity?.map((actividad) => {
-              return (
-                <article key={Math.random().toString(36).substr(2, 9)}>
-                  <div className={styles.boxActivity}>
-                    <h3>Activity</h3>
-                    <p>Name: {actividad.name}</p>
-                    <p>Difficulty: {actividad.difficulty}</p>
-                    <p>Season: {actividad.season}</p>
-                    <p>Duration: {actividad.duration}</p>
-                  </div>
-                </article>
-              );
-            })}
-          </section>
-        </>
+        </div>
       ) : (
         <div className={styles.loading}>
           <img src={loading} className={styles.imagenLoading} />

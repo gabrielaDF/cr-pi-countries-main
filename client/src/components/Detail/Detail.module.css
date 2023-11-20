@@ -22,16 +22,25 @@
   margin: 1rem;
   margin-left: auto;
 }
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  flex-direction: column;
+  overflow-y: auto;
+}
 
 .contenedor {
   display: flex;
   padding: 1rem;
   margin: 1rem;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: left;
   color: rgb(0, 6, 11);
   font-weight: bold;
+  font-size: 1.2rem;
+  text-shadow: 2px 2px 8px rgba(233, 224, 224, 0.8);
 }
 
 .detalles {
@@ -44,25 +53,13 @@
   background-color: rgba(76, 0, 130, 0);
 }
 
-.activity {
-  color: rgb(73, 73, 73);
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: nowrap;
-  flex-direction: row;
-  border: 1rem;
-  height: 15rem;
-  /* background-color: rgba(76, 0, 130, 0.099); */
-  /* width: 10rem; */
-}
-
 .boxActivity {
   width: 15rem;
-  height: 12rem;
-  padding: 1rem;
+  height: 13rem;
+  padding: 2rem;
   border-radius: 1rem;
-  background-color: rgba(76, 0, 130, 0.099);
-  box-shadow: 0px 1px 4px 0px rgb(55, 55, 55);
+  justify-content: center;
+  font-size: 1.2rem;
 }
 
 .imagenLoading {
@@ -99,4 +96,11 @@
   background-color: rgba(97, 97, 97, 0.985);
   color: rgb(255, 255, 255);
   font-weight: none;
+}
+.activity {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: flex-start;
+  flex-direction: row;
 }
