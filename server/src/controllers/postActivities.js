@@ -22,7 +22,8 @@ const postActivities = async (req, res) => {
       const hasCountries = await activity.hasCountries(countries);
       if (hasCountries) {
         res.status(409).json({
-          error: "Activity with the same name and countries already exists",
+          error:
+            "  server Activity with the same name and countries already exists",
         });
       }
     }

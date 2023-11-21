@@ -5,11 +5,13 @@ const getAllCountries = require("./src/controllers/getAllCountries.js");
 const PORT = 3001;
 
 conn
-  .sync({ alter: false })
+  .sync({ force: false })
   .then(() => {
     server.listen(PORT, () => {
       getAllCountries();
       console.log(`Server listening on port ${PORT}`);
     });
   })
-  .catch((error) => console.error(error));
+  .catch((error) => {
+    throw Error(error.message);
+  });

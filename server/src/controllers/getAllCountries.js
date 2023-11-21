@@ -20,7 +20,6 @@ const getAllCountries = async (req, res) => {
       };
     });
 
-    //console.log(allCountries);
     await Country.bulkCreate(allCountries, {
       updateOnDuplicate: [
         "name",
