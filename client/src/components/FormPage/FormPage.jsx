@@ -10,6 +10,7 @@ import * as validations from "./Validations";
 
 function FormPage() {
   const [error, setError] = useState("");
+  const [errors, setErrors] = useState({});
   const [mostrarError, setMostrarError] = useState(false);
   const [state, setState] = useState({
     name: "",
@@ -28,7 +29,7 @@ function FormPage() {
 
   function handleSelect(e) {
     if (state.countries.includes(e.target.value)) {
-      console.log("You can not repeat the same country");
+      alert("You can not repeat the same country");
     } else {
       setState({
         ...state,
@@ -41,12 +42,20 @@ function FormPage() {
       ...state,
       [e.target.name]: e.target.value,
     });
+    setErrors({
+      ...errors,
+      [e.target.name]: validations.validateField(e.target.name, e.target.value),
+    });
   }
 
   function handleChoose(e) {
     setState({
       ...state,
       [e.target.name]: e.target.value,
+    });
+    setErrors({
+      ...errors,
+      [e.target.name]: validations.validateField(e.target.name, e.target.value),
     });
   }
   function handleRemove(e) {
@@ -57,49 +66,67 @@ function FormPage() {
       ),
     });
   }
-  function handleSumit(e) {
+  async function handleSumit(e) {
     e.preventDefault();
     const durationAsFloat = parseFloat(state.duration);
     const nameError = validations.validateName(state.name);
     const difficultyError = validations.validateDifficulty(state.difficulty);
     const seasonError = validations.validateSeason(state.season);
     const countriesError = validations.validateCountries(state.countries);
+    const allFieldsFilledError = validations.validateAllFieldsFilled(state);
 
-    // Display errors if any
+    if (allFieldsFilledError) {
+      setError(allFieldsFilledError);
+      setMostrarError(true);
+      return;
+    }
+
     if (nameError || difficultyError || seasonError || countriesError) {
       setError(nameError || difficultyError || seasonError || countriesError);
       setMostrarError(true);
       return;
     }
-    // If no errors, proceed with creating the activity
 
-    const arrayIds = state.countries;
-    console.log(arrayIds);
-    for (var i = 0; i < arrayIds.length; i++) {
-      const activityData = {
-        ...state,
-        countries: arrayIds[i].toString(),
-        duration: durationAsFloat,
-      };
-      dispatch(createActivity(activityData));
-      console.log(activityData);
+    try {
+      // Use Promise.all to wait for all dispatches to complete
+      await Promise.all(
+        state.countries.map(async (countryId) => {
+          const activityData = {
+            ...state,
+            countries: countryId.toString(),
+            duration: durationAsFloat,
+          };
+
+          const response = await dispatch(createActivity(activityData));
+
+          if (response && response.message) {
+            alert(response.message);
+          } else {
+            alert("Your activity was successfully created");
+          }
+        })
+      );
+
+      setState({
+        name: "",
+        difficulty: 0,
+        duration: "",
+        season: "",
+        countries: [],
+      });
+
+      navegate("/countries");
+    } catch (error) {
+      alert(
+        "Error creating activity. Check if the activity is already created"
+      );
     }
-
-    // Reset form state
-    setState({
-      name: "",
-      difficulty: 0,
-      duration: "",
-      season: "",
-      countries: [],
-    });
-
-    alert("Your activity was successfully created");
-    navegate("/countries");
   }
+
   {
     mostrarError && <div className={styles.error}>{error}</div>;
   }
+
   return (
     <>
       <header className={styles.header}>
@@ -127,6 +154,7 @@ function FormPage() {
                 value={state.name}
                 onChange={handleChange}
               />
+              {errors.name && <p className={styles.error}>{errors.name}</p>}
             </>
 
             <>
@@ -143,6 +171,9 @@ function FormPage() {
                 onChange={handleChange}
                 required
               />
+              {errors.duration && (
+                <p className={styles.error}>{errors.duration}</p>
+              )}
             </>
             <label className={styles.label}>Difficulty</label>
             <div className={styles.contenedor}>
@@ -191,6 +222,9 @@ function FormPage() {
                 name="difficulty"
                 onChange={handleChoose}
               />
+              {errors.difficulty && (
+                <p className={styles.error}>{errors.difficulty}</p>
+              )}
             </div>
             <label className={styles.label}>Season</label>
             <div className={styles.contenedor}>
@@ -230,6 +264,7 @@ function FormPage() {
                 name="season"
                 onChange={handleChoose}
               />
+              {errors.season && <p className={styles.error}>{errors.season}</p>}
             </div>
             <label className={styles.label}>Country</label>
             <select
@@ -247,14 +282,17 @@ function FormPage() {
                   </option>
                 );
               })}
+              {errors.countries && (
+                <p className={styles.error}>{errors.countries}</p>
+              )}
             </select>
             <button className={styles.button} type="submit">
               CREATE
             </button>
             <div className={styles.contenedorC}>
-              {state.countries?.map((country) => {
+              {state.countries?.map((country, index) => {
                 return (
-                  <div key={country.id}>
+                  <div key={index}>
                     <div className={styles.contenedorCountry}>
                       <button
                         className={styles.buttonClose}

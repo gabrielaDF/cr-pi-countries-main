@@ -29,3 +29,33 @@ export const validateCountries = (countries) => {
   }
   return null; // No error
 };
+export function validateField(fieldName, value) {
+  switch (fieldName) {
+    case "name":
+      return validateName(value);
+    case "difficulty":
+      return validateDifficulty(value);
+    case "season":
+      return validateSeason(value);
+    case "countries":
+      return validateCountries(value);
+    default:
+      return "";
+  }
+}
+
+export function validateAllFieldsFilled(state) {
+  const { name, difficulty, duration, season, countries } = state;
+
+  if (
+    !name ||
+    difficulty === 0 ||
+    !duration ||
+    !season ||
+    countries.length === 0
+  ) {
+    return "Please fill in all fields";
+  }
+
+  return "";
+}

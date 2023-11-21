@@ -62,7 +62,6 @@ export function createActivity(activity) {
     try {
       const response = await axios.post(`${API_URL}/activities`, activity);
       const createdActivity = response.data;
-      console.log(response.data);
 
       dispatch({
         type: CREATE_ACTIVITY,

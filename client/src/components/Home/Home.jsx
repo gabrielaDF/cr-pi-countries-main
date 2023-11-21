@@ -3,6 +3,7 @@ import Nav from "../Nav/Nav";
 import Card from "../Card/Card";
 import loading from "./logoapp1-01.png";
 import { useDispatch, useSelector } from "react-redux";
+
 import {
   allCountries,
   clear,
@@ -28,6 +29,7 @@ function Home() {
   let [input, setInput] = useState(1);
   let datos = countries === "The country was not found" ? "0" : countries;
   const [dataLoaded, setDataLoaded] = useState(false);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -36,10 +38,9 @@ function Home() {
         await dispatch(allActivity());
         setDataLoaded(true);
       } catch (error) {
-        console.error("Error fetching data:", error.message);
+        throw Error(error.message);
       }
     };
-
     fetchData();
   }, [dispatch]);
 
@@ -53,12 +54,12 @@ function Home() {
 
   const allActivityData = useSelector((state) => state.allActivity) || [];
   let filterActivities = allActivityData || [];
-  console.log(filterActivities);
+
   let allActivities = [];
   if (Array.isArray(filterActivities)) {
     allActivities = filterActivities.flatMap((c) => c.name || []);
   }
-  console.log(allActivities);
+
   let uniqueActivitiesSet = new Set(allActivities);
 
   let uniqueActivities = Array.from(uniqueActivitiesSet);
@@ -69,18 +70,23 @@ function Home() {
 
   function handleSelectAlphabets(event) {
     event.preventDefault();
+
     dispatch(orderAlphabets(event.target.value));
+
     setInput((input = 1));
     setPag(1);
   }
   function handleSelectPopulation(event) {
     event.preventDefault();
+
     dispatch(orderPopulation(event.target.value));
+
     setInput((input = 1));
     setPag(1);
   }
   function handleSelectContinent(event) {
     dispatch(filterContinent(event.target.value));
+
     setInput((input = 1));
     setPag(1);
   }
@@ -107,10 +113,9 @@ function Home() {
           className={style.orden}
           name="orderName"
           id="orderName"
-          onChange={(event) => handleSelectAlphabets(event)}
+          onChange={handleSelectAlphabets}
         >
-          <option> Order Alphabets</option>
-          {/* <option value="Disorderly">Disorderly</option> */}
+          <option value="Disorderly"> Order Alphabets</option>
           <option value="asc">Ascendent</option>
           <option value="des">Descendent</option>
         </select>
@@ -118,10 +123,9 @@ function Home() {
           className={style.population}
           name="orderPopulation"
           id="orderPopulation"
-          onChange={(event) => handleSelectPopulation(event)}
+          onChange={handleSelectPopulation}
         >
-          <option>Order Population</option>
-          {/* <option value="Disorderly">Disorderly</option> */}
+          <option value="Disorderly">Order Population</option>
           <option value="asc">Ascendent</option>
           <option value="des">Descendent</option>
         </select>
@@ -129,7 +133,7 @@ function Home() {
           className={style.continent}
           name="filterContinent"
           id="filterContinent"
-          onChange={(event) => handleSelectContinent(event)}
+          onChange={handleSelectContinent}
         >
           <option value="todos">All Continents</option>
           <option value="Africa">Africa</option>
@@ -144,9 +148,9 @@ function Home() {
           className={style.activity}
           name="filterActivity"
           id="filterActivity"
-          onChange={(event) => handleSelectActivity(event)}
+          onChange={handleSelectActivity}
         >
-          <option> Activity</option>
+          <option value="Unfiltered"> Activity</option>
           <option value="Unfiltered">Unfiltered</option>
           <option value="AllActivities">All Activities</option>
           {arrayActivity1?.map((item) => {

@@ -11,7 +11,7 @@
   justify-content: flex-start;
   flex-direction: row;
   background-color: rgba(32, 30, 30, 0.774);
-  height: 8rem;
+  height: 5rem;
   width: auto;
   align-content: flex-start;
   align-items: center;
@@ -27,7 +27,6 @@
   flex-wrap: nowrap;
   justify-content: flex-start;
   flex-direction: column;
-  overflow-y: auto;
 }
 
 .contenedor {

@@ -15,8 +15,7 @@ function Detail() {
   useEffect(() => {
     dispatch(countryById(id));
   }, [dispatch, id]);
-  console.log("Detail:", detail);
-  console.log("Activities:", detail.Activities);
+
   return (
     <div>
       <header className={styles.header}>
@@ -39,9 +38,9 @@ function Detail() {
               <p>SUB-REGION: {detail.subregion}</p>
             </div>
             <div className={styles.activity}>
-              {detail.Activities?.map((actividad) => {
+              {detail.Activities?.map((actividad, index) => {
                 return (
-                  <article key={actividad.id}>
+                  <article key={index}>
                     <div className={styles.boxActivity}>
                       <h3>Activity</h3>
                       <p>Name: {actividad.name}</p>

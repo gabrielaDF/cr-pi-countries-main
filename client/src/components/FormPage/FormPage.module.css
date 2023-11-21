@@ -27,8 +27,8 @@
   justify-content: space-around;
 }
 .formulario {
-  padding: 2rem;
-  /* margin-top: 10%; */
+  padding: 1rem;
+
   height: auto;
   width: 30rem;
   display: flex;
@@ -66,7 +66,6 @@
 
 .input {
   cursor: pointer;
-  /* color: red; */
   border: none;
   background-color: #e2e7f3;
   font-size: medium;
@@ -95,8 +94,8 @@ input[type="radio"]:checked {
   justify-content: space-between;
   margin-left: 1rem;
   padding-left: 0.5rem;
-  margin: 1rem;
-  /* text-align: left; */
+  margin: 0.2rem;
+
   align-items: center;
 }
 
@@ -137,7 +136,6 @@ button:hover {
 }
 
 .contenedorCountry {
-  /* width: 10rem; */
   width: 10rem;
   width: auto;
   height: 3rem;
@@ -148,7 +146,7 @@ button:hover {
   border-radius: 0.5rem;
   text-align: justify;
   margin: 1rem;
-  /* margin-left: 0.8rem; */
+
   align-items: flex-start;
 }
 
@@ -180,7 +178,6 @@ buttonClose:hover {
 
 .contenedorC {
   display: flex;
-  /* max-width: 5rem; */
   flex-direction: row;
   justify-content: flex-start;
   align-content: stretch;
@@ -199,7 +196,7 @@ buttonClose:hover {
   justify-content: flex-start;
   flex-direction: row;
   background-color: rgba(32, 30, 30, 0.774);
-  height: 8rem;
+  height: 5rem;
   width: auto;
   align-content: flex-start;
   align-items: center;
