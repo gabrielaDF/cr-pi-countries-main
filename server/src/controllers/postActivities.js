@@ -17,7 +17,7 @@ const postActivities = async (req, res) => {
       },
     });
 
-    // Si ya existe una actividad con el mismo nombre, verifica la asociación con los países
+    
     if (!created) {
       const hasCountries = await activity.hasCountries(countries);
       if (hasCountries) {
@@ -27,7 +27,7 @@ const postActivities = async (req, res) => {
         });
       }
     }
-    // Si no existe la actividad o si existe pero no tiene la misma asociación de países, actualiza la asociación
+    
     await activity.setCountries(countries);
 
     return res.status(201).json(activity);

@@ -18,7 +18,7 @@ const getById = async (req, res) => {
     });
 
     if (!country) {
-      return res.status(404).json({ message: "Countries not found" });
+      res.status(404).json({ message: "Countries not found" });
     }
     res.status(200).json(country);
   } catch (error) {

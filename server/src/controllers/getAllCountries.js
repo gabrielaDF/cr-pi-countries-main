@@ -52,7 +52,7 @@ const getAllCountries = async (req, res) => {
         ],
       });
       if (countries.length === 0) {
-        return res.status(404).json({ message: "No countries found" });
+        res.status(404).json({ message: "No countries found" });
       }
       res.status(200).json(countries);
     }
