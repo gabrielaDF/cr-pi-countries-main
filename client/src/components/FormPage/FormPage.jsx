@@ -88,7 +88,7 @@ function FormPage() {
     }
 
     try {
-      // Use Promise.all to wait for all dispatches to complete
+      
       await Promise.all(
         state.countries.map(async (countryId) => {
           const activityData = {

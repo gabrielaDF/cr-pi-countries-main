@@ -115,20 +115,16 @@ const rootReducer = (state = initialState, action) => {
       let filteredCountries;
 
       if (action.payload === "Unfiltered") {
-        // Obtener todos los países que tienen actividades registradas
         filteredCountries = state.copyCountries;
       } else if (action.payload === "AllActivities") {
-        // Obtener todos los países que tienen actividades registradas
         const countryNamesWithActivities = state.allActivity.map((item) =>
           item.Countries[0] ? item.Countries[0].name : null
         );
 
-        // Filtrar state.copyCountries según la lista de countryNamesWithActivities
         filteredCountries = state.copyCountries.filter((country) =>
           countryNamesWithActivities.includes(country.name)
         );
       } else {
-        // Obtener los países según el nombre de la actividad
         const matchingItems = state.allActivity.filter(
           (item) => item.name === action.payload
         );
@@ -136,7 +132,6 @@ const rootReducer = (state = initialState, action) => {
           item.Countries[0] ? item.Countries[0].name : null
         );
 
-        // Filtrar state.copyCountries según la lista de countryNames
         filteredCountries = state.copyCountries.filter((country) =>
           countryNames.includes(country.name)
         );
