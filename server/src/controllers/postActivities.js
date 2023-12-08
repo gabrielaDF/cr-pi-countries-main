@@ -17,7 +17,6 @@ const postActivities = async (req, res) => {
       },
     });
 
-    
     if (!created) {
       const hasCountries = await activity.hasCountries(countries);
       if (hasCountries) {
@@ -27,7 +26,7 @@ const postActivities = async (req, res) => {
         });
       }
     }
-    
+
     await activity.setCountries(countries);
 
     return res.status(201).json(activity);

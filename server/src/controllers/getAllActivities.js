@@ -6,8 +6,8 @@ const getAllActivities = async (req, res) => {
       include: [
         {
           model: Country,
-          attributes: ["name"], 
-          through: { attributes: [] }, 
+          attributes: ["name"],
+          through: { attributes: [] },
         },
       ],
     });
